@@ -2,7 +2,7 @@ import java.io.File
 
 fun main() {
     fun parseInput(input: String): List<Int> = input.split("\n\n").map { elf ->
-        elf.split("\n").map { calory -> calory.toInt() }
+        elf.lines().map { calory -> calory.toInt() }
     }.map { it.sum() }
 
     fun sumTopElvesCalories(totalCaloriesPerElf: List<Int>, numberOfTopElves: Int) =
