@@ -1,18 +1,21 @@
 import java.io.File
 
 fun main() {
+    fun parseInput(input: String): List<Int> = input.split("\n\n").map { elf ->
+        elf.split("\n").map { calory -> calory.toInt() }
+    }.map { it.sum() }
+
+    fun sumTopElvesCalories(totalCaloriesPerElf: List<Int>, numberOfTopElves: Int) =
+        totalCaloriesPerElf.sortedDescending().take(numberOfTopElves).sum()
+
     fun part1(input: String): Int {
-        val data = input.split("\n\n").map { elf ->
-                elf.split("\n").map { calory -> calory.toInt() }
-            }
-        return data.maxOf { it.sum() }
+        val data = parseInput(input)
+        return sumTopElvesCalories(data, 1)
     }
 
     fun part2(input: String): Int {
-        val data = input.split("\n\n").map { elf ->
-                elf.split("\n").map { calory -> calory.toInt() }
-            }.map { it.sum() }
-        return data.sortedDescending().subList(0, 3).sum()
+        val data = parseInput(input)
+        return sumTopElvesCalories(data, 3)
     }
 
     val testInput = File("src/Day01_test.txt").readText()
