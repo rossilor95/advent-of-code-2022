@@ -1,5 +1,4 @@
 fun main() {
-
     fun part1(input: List<String>): Int {
         fun calculateShapeScore(myShape: Char) = when (myShape) {
             'X' -> 1
