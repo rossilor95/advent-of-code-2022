@@ -22,8 +22,8 @@ fun main() {
     val input = File("src/Day01.txt").readText()
 
     check(part1(testInput) == 24000)
-    println(part1(input))
+    println("Part 1 Answer: ${part1(input)}")
 
     check(part2(testInput) == 45000)
-    println(part2(input))
+    println("Part 2 Answer: ${part2(input)}")
 }
