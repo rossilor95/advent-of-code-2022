@@ -32,11 +32,11 @@ fun main() {
     }
 
     fun List<ArrayDeque<Char>>.moveCrates(procedureStep: ProcedureStep) = repeat(procedureStep.cratesToMove) {
-        val crate = this[procedureStep.originStack].removeFirst()
-        this[procedureStep.destinationStack].addFirst(crate)
-    }
+            val crate = this[procedureStep.originStack].removeFirst()
+            this[procedureStep.destinationStack].addFirst(crate)
+        }
 
-    fun List<ArrayDeque<Char>>.getCratesOnTop() = this.map { it.first() }.joinToString(separator = "")
+    fun List<ArrayDeque<Char>>.getCratesOnTop(): String = this.map { it.first() }.joinToString(separator = "")
 
     fun part1(input: List<String>): String {
         val stacks: List<ArrayDeque<Char>> = parseStacks(input)
