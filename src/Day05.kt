@@ -31,10 +31,11 @@ fun main() {
         }
     }
 
-    fun List<ArrayDeque<Char>>.moveCrates(procedureStep: ProcedureStep) = repeat(procedureStep.cratesToMove) {
-            val crate = this[procedureStep.originStack].removeFirst()
-            this[procedureStep.destinationStack].addFirst(crate)
-        }
+    fun List<ArrayDeque<Char>>.moveCrates(procedureStep: ProcedureStep, retainOrder: Boolean = false) {
+        val cratesToMove = this[procedureStep.originStack].take(procedureStep.cratesToMove)
+        repeat(procedureStep.cratesToMove) { this[procedureStep.originStack].removeFirst() }
+        this[procedureStep.destinationStack].addAll(0, if (retainOrder) cratesToMove else cratesToMove.reversed())
+    }
 
     fun List<ArrayDeque<Char>>.getCratesOnTop(): String = this.map { it.first() }.joinToString(separator = "")
 
@@ -47,12 +48,21 @@ fun main() {
         return stacks.getCratesOnTop()
     }
 
+    fun part2(input: List<String>): String {
+        val stacks: List<ArrayDeque<Char>> = parseStacks(input)
+        val procedure: List<ProcedureStep> = parseProcedure(input)
+        for (procedureStep in procedure) {
+            stacks.moveCrates(procedureStep, retainOrder = true)
+        }
+        return stacks.getCratesOnTop()
+    }
+
     val testInput = readInput("Day05_test")
     val input = readInput("Day05")
 
     check(part1(testInput) == "CMZ")
     println("Part 1 Answer: ${part1(input)}")
 
-//    check(part2(testInput) == 4)
-//    println("Part 2 Answer: ${part2(input)}")
+    check(part2(testInput) == "MCD")
+    println("Part 2 Answer: ${part2(input)}")
 }
