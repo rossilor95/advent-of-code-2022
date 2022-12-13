@@ -5,17 +5,17 @@ fun main() {
         elf.lines().map { calory -> calory.toInt() }
     }.map { it.sum() }
 
-    fun sumTopElvesCalories(totalCaloriesPerElf: List<Int>, numberOfTopElves: Int) =
-        totalCaloriesPerElf.sortedDescending().take(numberOfTopElves).sum()
+    fun sumTopCalories(calories: List<Int>, top: Int) =
+        calories.sortedDescending().take(top).sum()
 
     fun part1(input: String): Int {
         val data = parseInput(input)
-        return sumTopElvesCalories(data, 1)
+        return sumTopCalories(data, 1)
     }
 
     fun part2(input: String): Int {
         val data = parseInput(input)
-        return sumTopElvesCalories(data, 3)
+        return sumTopCalories(data, 3)
     }
 
     val testInput = File("src/Day01_test.txt").readText()
